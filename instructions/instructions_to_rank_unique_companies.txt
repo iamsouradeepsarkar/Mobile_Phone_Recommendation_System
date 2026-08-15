@@ -1,0 +1,71 @@
+You will be given a Python dictionary containing a variable number of mobile phone companies.
+
+The dictionary has this format:
+
+{ ID: "COMPANY_NAME" }
+
+The number of companies is NOT fixed. It may be any positive number.
+
+Your task is to evaluate all companies provided in the dictionary and assign each company a UNIQUE RANK based on its POPULARITY and market presence among the set.
+
+RANKING RULES
+- Let N = number of companies in the input dictionary.
+- Assign ranks from N down to 1:
+  - Rank N = MOST POPULAR / most influential company in this set
+  - Rank 1 = LEAST POPULAR company in this set
+- Use every integer rank from 1 through N exactly once.
+- Ranking must be based on company popularity, market presence, and consumer adoption inferred from the company names. Do not use IDs to determine rank.
+
+POPULARITY & PRESENCE CRITERIA
+Evaluate company popularity using reasonable real-world signals and heuristics:
+- Global and regional sales volume and market share
+- Installed user base and active devices
+- Brand recognition and market penetration
+- Recent sales momentum and product cadence
+- Carrier and retail presence (distribution and partnerships)
+- Ecosystem strength (software, services, device lineup)
+- Consumer sentiment, reviews, and social visibility
+- Pricing and product range that affect adoption
+- After-sales support and brand loyalty
+Use domain knowledge and the company names to infer these signals; you are NOT required to fetch external data.
+
+LOCAL RANKING
+- Ranking is ONLY relative to the companies present in the input dictionary.
+- The most popular company in the current input MUST receive rank N.
+- The least popular company in the current input MUST receive rank 1.
+
+DATA INTEGRITY
+- The input dictionary is the SOURCE OF TRUTH.
+- Every input ID MUST appear exactly once in the output.
+- Do NOT add, remove, rename, duplicate, or modify any input ID.
+- The company names are used only to determine popularity.
+- The ONLY thing that changes is the ranking associated with each ID.
+
+HANDLING EQUAL OR SIMILAR POPULARITY
+- If companies have similar popularity, assign adjacent ranks; the exact order between them is flexible.
+
+REQUIRED PROCESS
+Before responding, internally perform:
+1. Count entries → N.
+2. Identify each company name.
+3. Evaluate relative popularity using the criteria above.
+4. Rank companies from MOST to LEAST popular.
+5. Assign ranks N, N-1, ..., 1 and map them back to original IDs.
+6. Verify every input ID appears once and ranks cover 1..N exactly.
+
+RESPONSE FORMAT — ABSOLUTE AND MANDATORY
+- Return ONLY a single Python dictionary literal and nothing else.
+- The dictionary must be a valid Python literal starting with "{" and ending with "}".
+- Use the exact input IDs as keys and integer ranks as values.
+- Do NOT include any text, explanation, headings, code fences, or extra characters before or after the dictionary.
+- Use plain ASCII quotes if needed.
+- If you cannot produce a valid dictionary, return exactly {} and nothing else.
+
+VALIDATION (must be satisfied before responding)
+- Output entries count == input entries count.
+- Every input ID appears exactly once.
+- Ranks are exactly the integers from 1 through N, each used once.
+- Ranking is based on company popularity, not numeric ID.
+
+OUTPUT EXAMPLE (illustrative only; do NOT include in response):
+{ 17: 4, 3: 2, 91: 1, 42: 3 }
