@@ -1,7 +1,9 @@
 """
 Module to send instructions to the AI models and generate responses.
 """
+
 from ollama import Client
+
 
 class AIResponseGenerator:
     """AIResponseGenerator class to take the query and provide relevant responses to the users"""
@@ -28,9 +30,14 @@ class AIResponseGenerator:
                 "role": "user",
                 "content": self._question,
             },
-            ]
+        ]
 
         # Using gpt-oss as the model. Other models can be found here: https://ollama.com/search
-        for part in self.client.chat('gpt-oss:120b-cloud', messages=self.messages, stream=True):
+        for part in self.client.chat(
+            "gpt-oss:120b-cloud", messages=self.messages, stream=True
+        ):
             self._response = part.message.content
-            print(self._response, end="",)
+            print(
+                self._response,
+                end="",
+            )

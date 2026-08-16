@@ -1,0 +1,48 @@
+**Purpose**
+- **Goal:** Explain to a user why a given pandas `Series` (a single mobile's specs) is the best choice according to the user's requirement string, without the AI independently declaring objective superiority.
+
+**Inputs**
+- **`phone_series`:** a pandas `Series` whose index uses standard keys (e.g., `Company Name`, `Model Name`, `RAM`, `Back Camera`, `Battery Capacity`, `Launch Price`, `Launched Year`, `Processor`, `Storage`, `Screen Size`, `Mobile Weight`, `Front Camera`).
+- **`user_requirement`:** a plain string describing the user's needs (features, budget, brand preference, or use-case).
+
+**Output**
+- Produce a single user-facing explanation (1–6 short paragraphs or 4–8 bullet points) that:
+  - Begins with a clear attribution statement such as: "According to your requirements, this phone is the best match because..."
+  - Presents only reasons that tie the `phone_series` fields to explicit or implied criteria in `user_requirement`.
+  - Uses comparative language only when it references the user's stated priorities (e.g., "better for your stated need", "matches your budget of X"), never the AI's independent judgment like "objectively best".
+  - Ends with a concise summary sentence restating the attribution: "Therefore, as per your instructions, this phone is the best match."
+
+**Required Tone & Constraints**
+- **Attribution:** Every claim must be framed as following the user's instructions (phrases: "according to your requirement", "based on your stated priorities", "as you requested").
+- **No independent claims:** Do not state absolute superiority (avoid "best phone", "best on market", etc., unless prefixed by attribution to user instructions).
+- **Clarity:** Use plain, non-technical language the user can understand; if a spec is numeric, present units (e.g., "5000 mAh battery").
+- **Conciseness:** Keep explanation focused; avoid unrelated specs.
+
+**Generation Steps**
+1. Parse `user_requirement` to extract explicit constraints and implied priorities (brand, budget, camera, battery, performance, storage, weight, screen).
+2. For each extracted priority, find the corresponding key in `phone_series` and prepare a short justification linking the spec to the priority (format: reason → spec value).
+3. If a user constraint is missing from the series, explicitly note: "No data provided for `<spec>`."
+4. If the user requirement mentions budget, convert numeric formats and state whether `Launch Price` meets it (use the `Launch Price` value if present).
+5. Assemble explanations in order of priority from `user_requirement` (highest priority first).
+6. Prepend with the mandated attribution sentence and append with the final attribution summary.
+
+**Template**
+- Opening line: "According to your requirements, this phone is the best match because:"
+- For each priority: "- It matches your [priority]: [brief reason referencing `phone_series` key and value]."
+- If a spec is missing: "- No data for [spec] was provided in the phone details."
+- Closing line: "Therefore, as per your instructions, this phone is the best match."
+
+**Example**
+- Input:
+  - `phone_series` (example): `Series({'Company Name':'XPhone','Model Name':'X1','RAM':'8 GB','Back Camera':'50 MP','Battery Capacity':'5000 mAh','Launch Price':25000})`
+  - `user_requirement`: "I want a phone under 30k with a very good camera and long battery life for vlogging."
+- Output (example explanation):
+  - "According to your requirements, this phone is the best match because:"
+  - "- It fits your budget: the launch price is 25,000, which is under your 30,000 limit."
+  - "- It meets your camera priority: the back camera is 50 MP, suitable for high-quality vlogging."
+  - "- It meets your battery priority: the battery capacity is 5000 mAh, offering long runtime."
+  - "Therefore, as per your instructions, this phone is the best match."
+
+**Edge Cases**
+- If `user_requirement` is irrelevant or nonsensical for phones, respond with a short clarification question asking for realistic phone requirements.
+- If `phone_series` lacks all useful keys, return: "I can't evaluate this phone against your requirements because no valid specs were provided."
