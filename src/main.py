@@ -156,6 +156,9 @@ class MobileRecommender:
             )
 
         else:
+            print(
+                f"The best mobile phone for your requirements is: {self._refined_dataset.iloc[0]['Company Name']} {self._refined_dataset.iloc[0]['Model Name']}"
+            )
             with open(
                 os.path.join(
                     self._ai_instructions_directory,
