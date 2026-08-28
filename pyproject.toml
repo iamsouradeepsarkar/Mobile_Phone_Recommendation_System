@@ -1,6 +1,6 @@
 [project]
 name = "mobile_phone_recommendation_system"
-version = "0.1.7"
+version = "1.0.0"
 description = "An AI-powered system that recommends mobile phones based on user preferences and device specifications."
 requires-python = ">=3.10"
 dependencies = [
