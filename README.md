@@ -62,7 +62,9 @@ The package name used by `pip` and the module name used by Python are the same i
 
 Editable installation is intended for development. It makes the local source code importable in the environment, so changes to Python files are available without rebuilding and reinstalling the package.
 
-From the repository root, the directory containing `pyproject.toml`, run:
+First, download the Git repository to your local machine and open the repository root, the directory containing `pyproject.toml`.
+
+Then run:
 
 ```bash
 python -m pip install -e .
