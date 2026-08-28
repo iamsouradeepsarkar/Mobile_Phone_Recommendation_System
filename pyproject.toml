@@ -1,0 +1,26 @@
+[project]
+name = "mobile_phone_recommendation_system"
+version = "0.1.7"
+description = "An AI-powered system that recommends mobile phones based on user preferences and device specifications."
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.3.3,<3.0.0",
+    "ollama>=0.6.2,<1.0.0"
+]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.*", "**/*"]
+
+[project.urls]
+Homepage = "https://github.com/iamsouradeepsarkar/Mobile_Phone_Recommendation_System"
+Issues = "https://github.com/iamsouradeepsarkar/Mobile_Phone_Recommendation_System/issues"

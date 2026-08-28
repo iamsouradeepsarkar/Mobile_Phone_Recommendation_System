@@ -27,7 +27,7 @@ class FilterMobilesBasedOnUserInputs:
         # Variable to store the refined dataset after filtering and scoring the mobile phones based on user input
         self._refined_dataset = pd.read_csv(
             os.path.join(
-                os.path.dirname(os.path.dirname(__file__)),
+                os.path.dirname(__file__),
                 "refined_mobile_data",
                 "RefinedMobileDataSet.csv",
             )
@@ -35,7 +35,7 @@ class FilterMobilesBasedOnUserInputs:
 
         # Variable to store the directory where the ratings JSON files are stored
         self._ratings_json_directory = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)), "ratings_files"
+            os.path.dirname(__file__), "ratings_files"
         )
 
     def filter_data_based_on_user_input(self):

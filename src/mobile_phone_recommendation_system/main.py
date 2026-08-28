@@ -8,12 +8,12 @@ import io
 import os
 from pathlib import Path
 
-from ai_response_generator import AIResponseGenerator
-from data_cleaner import DataCleaner
-from filter_mobiles_based_on_user_inputs import FilterMobilesBasedOnUserInputs
-from unique_company_ratings import RateUniqueCompanies
-from unique_model_ratings import RateUniqueModels
-from unique_processor_ratings import RateUniqueProcessors
+from .ai_response_generator import AIResponseGenerator
+from .data_cleaner import DataCleaner
+from .filter_mobiles_based_on_user_inputs import FilterMobilesBasedOnUserInputs
+from .unique_company_ratings import RateUniqueCompanies
+from .unique_model_ratings import RateUniqueModels
+from .unique_processor_ratings import RateUniqueProcessors
 
 
 class MobileRecommender:
@@ -27,7 +27,7 @@ class MobileRecommender:
 
         # Path to the directory where the instructions for the AI are stored
         self._ai_instructions_directory = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)), "instructions"
+            os.path.dirname(__file__), "instructions"
         )
 
         # Variable to store the dictionary of requirements extracted from the user input by the AI
@@ -102,7 +102,7 @@ class MobileRecommender:
 
         # Create the directory where the the refined CSV file will be stored
         directory_path = Path(
-            os.path.join(os.path.dirname(__file__), "..", "ratings_files"),
+            os.path.join(os.path.dirname(__file__), "ratings_files"),
             exist_ok=True,
         )
         directory_path.mkdir(exist_ok=True)
@@ -110,7 +110,7 @@ class MobileRecommender:
         # We rate the unique companies, models and processors only if the ratings JSON files don't exist. If they exist, we don't rate them again.
         if not os.path.exists(
             os.path.join(
-                os.path.dirname(__file__), "..", "ratings_files", "company_ratings.json"
+                os.path.dirname(__file__), "ratings_files", "company_ratings.json"
             )
         ):
             rate_unique_companies = RateUniqueCompanies()
@@ -118,7 +118,7 @@ class MobileRecommender:
 
         if not os.path.exists(
             os.path.join(
-                os.path.dirname(__file__), "..", "ratings_files", "model_ratings.json"
+                os.path.dirname(__file__), "ratings_files", "model_ratings.json"
             )
         ):
             rate_unique_models = RateUniqueModels()
@@ -127,7 +127,6 @@ class MobileRecommender:
         if not os.path.exists(
             os.path.join(
                 os.path.dirname(__file__),
-                "..",
                 "ratings_files",
                 "processor_ratings.json",
             )
@@ -195,5 +194,6 @@ if __name__ == "__main__":
     mobile_recommender.take_and_validate_user_input()
     mobile_recommender.clean_dataset()
     mobile_recommender.rate_companies_models_and_processors()
-    mobile_recommender.filter_mobiles_based_on_user_inputs()
-    mobile_recommender.display_recommended_mobile_phones_to_the_users()
+    if mobile_recommender._dictionary_of_requirements_from_ai:
+        mobile_recommender.filter_mobiles_based_on_user_inputs()
+        mobile_recommender.display_recommended_mobile_phones_to_the_users()
