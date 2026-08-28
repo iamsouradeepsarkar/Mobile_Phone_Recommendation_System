@@ -81,6 +81,15 @@ If Ollama is not installed yet, install it from:
 
 https://ollama.com/download
 
+3. Sign in to Ollama before using the cloud model:
+
+```bash
+ollama signin
+```
+
+If you do not sign in and the model requires authentication, the application will fail with a `401 Unauthorized` error when it tries to call the AI model.
+
+
 ## Installation
 
 1. Clone the repository:
@@ -188,7 +197,8 @@ The final recommendation is displayed in the console, and the system explains wh
 
 ## Important Notes
 
-- The application uses a local Ollama model (`gpt-oss:120b-cloud`) for AI validation and explanation.
-- You must have Ollama running in order for the recommendation flow to work.
+- The application uses the Ollama model `gpt-oss:120b-cloud` for AI validation and explanation.
+- You must sign in to Ollama before using this model. If you skip authentication, requests may fail with `401 Unauthorized`.
+- You must also have Ollama running in order for the recommendation flow to work.
 - The project relies on the dataset file being available in the expected location. If the folder name or file path differs, update the path used in the Python files accordingly.
 - The repository currently includes generated files in `refined_mobile_data` and `ratings_files`; these will be regenerated automatically when these files aren't present by default.

@@ -17,12 +17,12 @@ class DataCleaner:
 
         # Path of the MobileDataSet.csv file
         self._csv_file_path = os.path.join(
-            os.path.dirname(__file__), "..", "Mobile_Data", "MobileDataSet.csv"
+            os.path.dirname(__file__), "Mobile_Data", "MobileDataSet.csv"
         )
 
         # Create the directory where the the refined CSV file will be stored
         directory_path = Path(
-            os.path.join(os.path.dirname(__file__), "..", "refined_mobile_data"),
+            os.path.join(os.path.dirname(__file__), "refined_mobile_data"),
             exist_ok=True,
         )
         directory_path.mkdir(exist_ok=True)

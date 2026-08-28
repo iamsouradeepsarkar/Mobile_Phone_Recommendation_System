@@ -8,8 +8,8 @@ import io
 import json
 import os
 
-from ai_response_generator import AIResponseGenerator
-from data_cleaner import DataCleaner
+from .ai_response_generator import AIResponseGenerator
+from .data_cleaner import DataCleaner
 
 
 class RateUniqueCompanies:
@@ -32,7 +32,7 @@ class RateUniqueCompanies:
 
         # Variable to store the file path where the ratings JSON file of the companies will be stored
         self._file_path_to_store_ratings = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)),
+            os.path.dirname(__file__),
             "ratings_files",
             "company_ratings.json",
         )
@@ -47,9 +47,7 @@ class RateUniqueCompanies:
         )
 
         # Fetch the instructions file and its contents
-        instruction_dir = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)), "instructions"
-        )
+        instruction_dir = os.path.join(os.path.dirname(__file__), "instructions")
         instructions = None
 
         with open(
